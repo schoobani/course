@@ -25,7 +25,7 @@
 [کتابخانه‌ی ترنسفورمرهای هاگینگ‌فِیس](https://github.com/huggingface/transformers) امکان ایجاد و استفاده از این مدل‌ها را فراهم می‌کند. [هابِ مدل‌ها](https://huggingface.co/models) شامل مدل‌های از پیش تعلیم دیده‌ای است که هرکسی می‌تواند آن‌ها را دانلود و استفاده کند. شما همچنین می‌توانید مدل‌های خودتان را روی این هاب بارگذاری کنید!
 
 <Tip>
-⚠️  هاب هاگینگ‌فِیس محدود به مدل‌های ترنسفورمر نمی‌شود. هرکسی می‌تواند هر نوع مدل یا دیتاسِتی را که می‌خواهد به اشتراک بگذارد!  یک حساب بسازید <span dir="ltr">[huggingface.co](https://huggingface.co)</span> تا از تمامی قابلیت‌های موجود بهره‌مند شوید.
+⚠️  هاب هاگینگ‌فِیس محدود به مدل‌های ترنسفورمر نمی‌شود. هرکسی می‌تواند هر نوع مدل یا دیتاسِتی را که می‌خواهد به اشتراک بگذارد!  یک حساب بسازید <span dir="ltr"></span> تا از تمامی قابلیت‌های موجود بهره‌مند شوید.
 </Tip>
 
 قبل از عمیق‌تر شدن درباره‌ی اینکه مدل‌های ترنسفورمر چگونه کار می‌کنند، بیایید نگاهی به چند مثال بیاندازیم که چگونه می‌توان از آن‌ها برای حل مشکلات جالب NLP استفاده کرد.
@@ -35,6 +35,7 @@
 <Youtube id="tiZFewofSLM" />
 
 ابتداترین شیء در کتابخانه ترنسفورمرهای هاگینگ‌فِیس تابع <span dir="ltr">‍`pipeline()`</span> است. این تابع، مدل را به گام‌های پیش‌پردازش و پس‌پردازش متصل می‌کند و به ما این امکان را می‌دهد که مستقیما هر نوع متنی را وارد و یک پاسخ قابل فهم دریافت کنیم.
+
 <span dir="ltr">
 ```python
 from transformers import pipeline
@@ -42,26 +43,27 @@ from transformers import pipeline
 classifier = pipeline("sentiment-analysis")
 classifier("I've been waiting for a HuggingFace course my whole life.")
 ```
-</span>
+<span>
+
 <span dir="ltr">
 ```python out
 [{'label': 'POSITIVE', 'score': 0.9598047137260437}]
 ```
-</span>
+<span>
+
 ما حتی می‌توانیم چندین جمله را بصورت همزمان وارد کنیم!
-<span dir="ltr">
+
 ```python
 classifier(
     ["I've been waiting for a HuggingFace course my whole life.", "I hate this so much!"]
 )
 ```
-</span>
-<span dir="ltr">
+
 ```python out
 [{'label': 'POSITIVE', 'score': 0.9598047137260437},
  {'label': 'NEGATIVE', 'score': 0.9994558095932007}]
 ```
-</span>
+
 بصورت پیش‌فرض، این پایپ‌لاین یک مدل از پیش تعلیم دیده خاص را که برای تحلیل احساسات در زبان انگلیسی کوک شده است استفاده می‌کند. زمانی که شیء <span dir="ltr">`classifier`</span> را ایجاد می‌کنید، مدل دانلود و انبار می‌شود. اگر دستور را دوباره اجرا کنید، مدل انبار شده مورد استفاده قرار می‌گیرد و احتیاجی به بارگذاری دوباره مدل نخواهد بود.
 
 زمانی که مقداری متن را برای پایپ‌لاین ارسال می‌کند، سه مرحله‌ی اصلی طی می‌شود:
@@ -89,7 +91,7 @@ Some of the currently [available pipelines](https://huggingface.co/transformers/
 ## [^1]دسته‌بندی زیرو-شات
 
 با یک مسئله سخت‌تر کارمان را آغاز می‌کنیم. شرایطی را در نظر بگیرید که می‌بایست متونی را دسته‌بندی کنیم که قبلا برچسپ‌گذاری نشده‌اند. این یک سناریوی متداول در پروژه‌های دنیای واقعی است چرا که نشانه‌گذاری متن اغلب کاری زمان‌بر و نیازمند تخصص در حوزه‌ای خاص است. در چنین شرایطی پایپ‌لاین <span dir="ltr">`zero-shot-classification`</span> بسیار قدرتمند است: به شما این امکان را می‌دهد تا مشخص کنید از کدام برچسپ‌ها برای دسته‌بندی استفاده کنید تا دیگر وابسته به برچسپ‌های مدل از پیش تعلیم دیده نباشید. قبلا دیدیم که چگونه مدل می‌تواند یک جمله را با استفاده از دو برچسپ مثبت یا منفی دسته‌بندی کنید - ولی همچنین می‌تواند متن را بر اساس هر مجموعه‌ای از برچسپ‌ها که می‌خواهید دسته‌بندی کند.
-<span dir="ltr">
+
 ```python
 from transformers import pipeline
 
@@ -99,14 +101,13 @@ classifier(
     candidate_labels=["education", "politics", "business"],
 )
 ```
-</span>
-<span dir="ltr">
+
 ```python out
 {'sequence': 'This is a course about the Transformers library',
  'labels': ['education', 'business', 'politics'],
  'scores': [0.8445963859558105, 0.111976258456707, 0.043427448719739914]}
 ```
-</span>
+
 این پایپ‌لاین زیرو-شات نامیده شده است چراکه شما برای استفاده از آن نیازی به کوک کردن مدل بر روی داده‌ی خود ندارید. این پایپ‌لاین می‌تواند مستقیما امتیاز احتمالات برای هر لیستی از برچسپ‌ها که می‌خواهید را بازگرداند.
 
 <Tip>
@@ -119,15 +120,14 @@ classifier(
 ## تولید متن
 
 حالا بیایید ببینیم چگونه از پایپ‌لاین برای تولید متن استفاده کنیم. ایده اصلی این است که شما یک نمونه متن اولیه به مدل ارایه می‌دهید و مدل با تولید مابقی متن آن را بصورت خودکار تکمیل می‌کند. این کاری مشابه قابلیت پیش‌بینی متن است که در بسیاری از گوشی‌های موبایل وجود دارد. تولید متن نیازمند تصادف است، پس طبیعی است که نتایج شما مشابه نتایجی که اینجا می‌بینید نباشند.
-<span dir="ltr">
+
 ```python
 from transformers import pipeline
 
 generator = pipeline("text-generation")
 generator("In this course, we will teach you how to")
 ```
-</span>
-<span dir="ltr">
+
 ```python out
 [{'generated_text': 'In this course, we will teach you how to understand and use '
                     'data flow and data interchange when handling user data. We '
@@ -135,7 +135,7 @@ generator("In this course, we will teach you how to")
                     'data flows — data flows of various types, as seen by the '
                     'HTTP'}]
 ```
-</span>
+
 می‌توانید تعداد رشته‌های متفاوت تولید شده را با استفاده از آرگومان <span dir="ltr">`num_return_sequences`</span> و طول نهایی متن تولید شده را با آرگومان  <span dir="ltr">`max_length`</span> مشخص کنید.
 
 <Tip>
@@ -151,7 +151,7 @@ generator("In this course, we will teach you how to")
 
 بیایید مدل  <span dir="ltr">[`distilgpt2`](https://huggingface.co/distilgpt2)</span> را امتحان کنیم! به این شیوه این مدل را می‌توانیم در همان پایپ‌لاین قبلی بارگذاری کنیم:
 
-<span dir="ltr">
+
 ```python
 from transformers import pipeline
 
@@ -162,8 +162,7 @@ generator(
     num_return_sequences=2,
 )
 ```
-</span>
-<span dir="ltr">
+
 ```python out
 [{'generated_text': 'In this course, we will teach you how to manipulate the world and '
                     'move your mental and physical capabilities to your advantage.'},
@@ -171,7 +170,7 @@ generator(
                     'practice realtime, and with a hands on experience on both real '
                     'time and real'}]
 ```
-</span>
+
 می‌توانید نتیجه‌ی جستجوی خود برای مدل را با کلیک روی تگ زبان بهبود بخشیده و مدلی را انتخاب کنید که می‌تواند در دیگر زبان‌ها متن تولید کند. هاب مدل‌ها حتی حاوی نقاط تعلیم برای مدل‌هایی است چند زبان را پشتیبانی می‌کنند.
 
 زمانی که مدلی را با کلیک بر روی آن انتخاب کردید، خواهید دید که ابزارکی وجود دارد که به شما امکان می‌دهد آن را مستقیما بصورت آنلاین بیازمایید. با این روش می‌توانید قابلیت‌های مدل را به سرعت و قبل از دانلود آن بسنجید.
@@ -191,15 +190,14 @@ generator(
 ## پر کردن جاهای خالی متن
 
 پایپ‌لاین بعدی که امتحان خواهید کرد <span dir="ltr">`fill-mask`</span> است. ایده‌ی این مسئله پر کردن جای خالی در متن ارائه شده است.
-<span dir="ltr">
+
 ```python
 from transformers import pipeline
 
 unmasker = pipeline("fill-mask")
 unmasker("This course will teach you all about <mask> models.", top_k=2)
 ```
-</span>
-<span dir="ltr">
+
 ```python out
 [{'sequence': 'This course will teach you all about mathematical models.',
   'score': 0.19619831442832947,
@@ -210,7 +208,7 @@ unmasker("This course will teach you all about <mask> models.", top_k=2)
   'token': 38163,
   'token_str': ' computational'}]
 ```
-</span>
+
 آرگومان <span dir="ltr">`top_k`</span> تعداد ممکن کلماتی را کنترل می‌کند که می‌خواهید نمایش دهید. توجه کنید که مدل جای کلمه‌ی  <span dir="ltr">`<mask>`</span> را پر می‌کند که اغلب با عنوان توکن <span dir="ltr">mask</span> شناخته می‌شود. دیگر مدل‌های پرکننده‌ی جاهای خالی ممکن است توکن‌های <span dir="ltr">mask</span> متفاوتی داشته باشند و همیشه بهتر است از کلمه‌ی <span dir="ltr">mask</span> مناسب، زمانی که در بین دیگر مدل‌ها جستجو می‌کنید مطمئن شود.
 
 <Tip>
@@ -222,22 +220,21 @@ unmasker("This course will teach you all about <mask> models.", top_k=2)
 ## [^2]تشخیص موجودیت اسمی
 
 تشخیص موجودیت اسمی (<span dir="ltr">NER</span>)‌ مسئله‌ای است که مدل می‌بایست تشخیص دهد کدام بخش‌ از متن ورودی مربوط به موجودیت‌هایی مانند اشخاص، موقعیت‌ها یا سازمان‌ها است. بیایید به این مثال نگاه کنیم:
-<span dir="ltr">
+
 ```python
 from transformers import pipeline
 
 ner = pipeline("ner", grouped_entities=True)
 ner("My name is Sylvain and I work at Hugging Face in Brooklyn.")
 ```
-</span>
-<span dir="ltr">
+
 ```python out
 [{'entity_group': 'PER', 'score': 0.99816, 'word': 'Sylvain', 'start': 11, 'end': 18}, 
  {'entity_group': 'ORG', 'score': 0.97960, 'word': 'Hugging Face', 'start': 33, 'end': 45}, 
  {'entity_group': 'LOC', 'score': 0.99321, 'word': 'Brooklyn', 'start': 49, 'end': 57}
 ]
 ```
-</span>
+
 در اینجا مدل به درستی تشخیص داده است که سیلوین نام یک شخص است <span dir="ltr">(PER)</span>، هاگینگ‌فِیس یک سازمان است <span dir="ltr">(ORG)</span>، و بورکلین یک موقعیت است <span dir="ltr">(LOC)</span>.
 
 از گزینه‌ی <span dir="ltr">`grouped_entities=True`</span> در تابع ساخت پایپ‌لاین استفاده می‌کنیم تا به پایپ‌لاین بگوییم بخش‌هایی از جمله‌ را که به موجودیت یکسانی متعلق است در یک گروه قرار دهد:‌ اینجا مدل به درستی  <span dir="ltr">"Hugging"</span> و <span dir="ltr">"Face"</span> را بعنوان سازمان گروه‌بندی کرده است با وجود اینکه این نام شامل چندین واژه است. در واقع همانطوری که در فصل بعدی خواهیم دید، پیش‌پردازش، بعضی واژگان را حتی به بخش‌های کوچک‌تری نیز تقسیم می‌کند. برای نمونه واژه‌ی <span dir="ltr">Sylvain</span> به چهار بخش تقسیم می‌شود: <span dir="ltr">`##yl`</span>، <span dir="ltr">`##va`</span>، <span dir="ltr">`S`</span> و <span dir="ltr">`##in`</span>. در مرحله‌ی پس‌پردازش پایپ‌لاین بطور موفقیت‌آمیز این قطعات را در یک گروه قرار می‌دهد.
@@ -251,7 +248,7 @@ ner("My name is Sylvain and I work at Hugging Face in Brooklyn.")
 ## پرسش و پاسخ
 
 پایپ‌لاین <span dir="ltr">`question-answering`</span> با استفاده از اطلاعات موجود در یک زمینه‌ خاص‌ به پرسش‌ها پاسخ می‌دهد.
-<span dir="ltr">
+
 ```python
 from transformers import pipeline
 
@@ -261,18 +258,17 @@ question_answerer(
     context="My name is Sylvain and I work at Hugging Face in Brooklyn",
 )
 ```
-</span>
-<span dir="ltr">
+
 ```python out
 {'score': 0.6385916471481323, 'start': 33, 'end': 45, 'answer': 'Hugging Face'}
 ```
-</span>
+
 توجه کنید که این پایپ‌لاین با استخراج اطلاعات از یک زمینه‌ی از پیش ارایه شده کار می‌کند و پاسخ را تولید نمی‌کند.
 
 ## خلاصه‌سازی
 
 خلاصه‌سازی مسئله‌ی کوتاه کردن یک متن به متنی کوتاه‌تر با حفظ همه‌ی (یا اغلب) جنبه‌های حائز اهمیت اشاره شده در متن است. یک مثال را باهم ببینیم:
-<span dir="ltr">
+
 ```python
 from transformers import pipeline
 
@@ -300,8 +296,7 @@ summarizer(
 """
 )
 ```
-</span>
-<span dir="ltr">
+
 ```python out
 [{'summary_text': ' America has changed dramatically during recent years . The '
                   'number of engineering graduates in the U.S. has declined in '
@@ -311,26 +306,25 @@ summarizer(
                   'industrial countries in Europe and Asia, continue to encourage '
                   'and advance engineering .'}]
 ```
-</span>
+
 همانند تولید متن، می‌توانید <span dir="ltr">`max_length`</span>  یا <span dir="ltr">`min_length`</span> را مشخص کنید.
 
 
 ## ترجمه
 
 برای ترجمه، با ارائه‌ی جفت زبان‌ها در نام مسئله می‌توانید از مدل‌ پیش‌فرض استفاده کنید (مانند <span dir="ltr">"translation_en_to_fr”</span>)، اما ساده‌ترین روش انتخاب مدلی که می‌خواهید از آن استفاده کنید در [هاب مدل‌ها](https://huggingface.co/models) است. اینجا سعی خواهیم کرد از فرانسوی به انگلیسی ترجمه کنیم:
-<span dir="ltr">
+
 ```python
 from transformers import pipeline
 
 translator = pipeline("translation", model="Helsinki-NLP/opus-mt-fr-en")
 translator("Ce cours est produit par Hugging Face.")
 ```
-</span>
-<span dir="ltr">
+
 ```python out
 [{'translation_text': 'This course is produced by Hugging Face.'}]
 ```
-</span>
+
 همانند تولید متن، می‌توانید <span dir="ltr">`max_length`</span>  یا <span dir="ltr">`min_length`</span> را مشخص کنید.
 
 <Tip>
