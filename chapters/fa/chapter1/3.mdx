@@ -53,6 +53,8 @@ classifier("I've been waiting for a HuggingFace course my whole life.")
 
 ما حتی می‌توانیم چندین جمله را بصورت همزمان وارد کنیم!
 
+<div dir="ltr">
+
 ```python
 classifier(
     ["I've been waiting for a HuggingFace course my whole life.", "I hate this so much!"]
@@ -63,7 +65,7 @@ classifier(
 [{'label': 'POSITIVE', 'score': 0.9598047137260437},
  {'label': 'NEGATIVE', 'score': 0.9994558095932007}]
 ```
-
+</div>
 بصورت پیش‌فرض، این پایپ‌لاین یک مدل از پیش تعلیم دیده خاص را که برای تحلیل احساسات در زبان انگلیسی کوک شده است استفاده می‌کند. زمانی که شیء <span dir="ltr">`classifier`</span> را ایجاد می‌کنید، مدل دانلود و انبار می‌شود. اگر دستور را دوباره اجرا کنید، مدل انبار شده مورد استفاده قرار می‌گیرد و احتیاجی به بارگذاری دوباره مدل نخواهد بود.
 
 زمانی که مقداری متن را برای پایپ‌لاین ارسال می‌کند، سه مرحله‌ی اصلی طی می‌شود:
@@ -92,6 +94,8 @@ Some of the currently [available pipelines](https://huggingface.co/transformers/
 
 با یک مسئله سخت‌تر کارمان را آغاز می‌کنیم. شرایطی را در نظر بگیرید که می‌بایست متونی را دسته‌بندی کنیم که قبلا برچسپ‌گذاری نشده‌اند. این یک سناریوی متداول در پروژه‌های دنیای واقعی است چرا که نشانه‌گذاری متن اغلب کاری زمان‌بر و نیازمند تخصص در حوزه‌ای خاص است. در چنین شرایطی پایپ‌لاین <span dir="ltr">`zero-shot-classification`</span> بسیار قدرتمند است: به شما این امکان را می‌دهد تا مشخص کنید از کدام برچسپ‌ها برای دسته‌بندی استفاده کنید تا دیگر وابسته به برچسپ‌های مدل از پیش تعلیم دیده نباشید. قبلا دیدیم که چگونه مدل می‌تواند یک جمله را با استفاده از دو برچسپ مثبت یا منفی دسته‌بندی کنید - ولی همچنین می‌تواند متن را بر اساس هر مجموعه‌ای از برچسپ‌ها که می‌خواهید دسته‌بندی کند.
 
+<div dir="ltr">
+
 ```python
 from transformers import pipeline
 
@@ -107,6 +111,7 @@ classifier(
  'labels': ['education', 'business', 'politics'],
  'scores': [0.8445963859558105, 0.111976258456707, 0.043427448719739914]}
 ```
+</div>
 
 این پایپ‌لاین زیرو-شات نامیده شده است چراکه شما برای استفاده از آن نیازی به کوک کردن مدل بر روی داده‌ی خود ندارید. این پایپ‌لاین می‌تواند مستقیما امتیاز احتمالات برای هر لیستی از برچسپ‌ها که می‌خواهید را بازگرداند.
 
@@ -120,6 +125,8 @@ classifier(
 ## تولید متن
 
 حالا بیایید ببینیم چگونه از پایپ‌لاین برای تولید متن استفاده کنیم. ایده اصلی این است که شما یک نمونه متن اولیه به مدل ارایه می‌دهید و مدل با تولید مابقی متن آن را بصورت خودکار تکمیل می‌کند. این کاری مشابه قابلیت پیش‌بینی متن است که در بسیاری از گوشی‌های موبایل وجود دارد. تولید متن نیازمند تصادف است، پس طبیعی است که نتایج شما مشابه نتایجی که اینجا می‌بینید نباشند.
+
+<div dir="ltr">
 
 ```python
 from transformers import pipeline
@@ -135,7 +142,7 @@ generator("In this course, we will teach you how to")
                     'data flows — data flows of various types, as seen by the '
                     'HTTP'}]
 ```
-
+</div>
 می‌توانید تعداد رشته‌های متفاوت تولید شده را با استفاده از آرگومان <span dir="ltr">`num_return_sequences`</span> و طول نهایی متن تولید شده را با آرگومان  <span dir="ltr">`max_length`</span> مشخص کنید.
 
 <Tip>
@@ -151,6 +158,7 @@ generator("In this course, we will teach you how to")
 
 بیایید مدل  <span dir="ltr">[`distilgpt2`](https://huggingface.co/distilgpt2)</span> را امتحان کنیم! به این شیوه این مدل را می‌توانیم در همان پایپ‌لاین قبلی بارگذاری کنیم:
 
+<div dir="ltr">
 
 ```python
 from transformers import pipeline
@@ -170,6 +178,7 @@ generator(
                     'practice realtime, and with a hands on experience on both real '
                     'time and real'}]
 ```
+</div>
 
 می‌توانید نتیجه‌ی جستجوی خود برای مدل را با کلیک روی تگ زبان بهبود بخشیده و مدلی را انتخاب کنید که می‌تواند در دیگر زبان‌ها متن تولید کند. هاب مدل‌ها حتی حاوی نقاط تعلیم برای مدل‌هایی است چند زبان را پشتیبانی می‌کنند.
 
@@ -191,6 +200,8 @@ generator(
 
 پایپ‌لاین بعدی که امتحان خواهید کرد <span dir="ltr">`fill-mask`</span> است. ایده‌ی این مسئله پر کردن جای خالی در متن ارائه شده است.
 
+<div dir="ltr">
+
 ```python
 from transformers import pipeline
 
@@ -208,6 +219,7 @@ unmasker("This course will teach you all about <mask> models.", top_k=2)
   'token': 38163,
   'token_str': ' computational'}]
 ```
+</div>
 
 آرگومان <span dir="ltr">`top_k`</span> تعداد ممکن کلماتی را کنترل می‌کند که می‌خواهید نمایش دهید. توجه کنید که مدل جای کلمه‌ی  <span dir="ltr">`<mask>`</span> را پر می‌کند که اغلب با عنوان توکن <span dir="ltr">mask</span> شناخته می‌شود. دیگر مدل‌های پرکننده‌ی جاهای خالی ممکن است توکن‌های <span dir="ltr">mask</span> متفاوتی داشته باشند و همیشه بهتر است از کلمه‌ی <span dir="ltr">mask</span> مناسب، زمانی که در بین دیگر مدل‌ها جستجو می‌کنید مطمئن شود.
 
@@ -220,6 +232,8 @@ unmasker("This course will teach you all about <mask> models.", top_k=2)
 ## [^2]تشخیص موجودیت اسمی
 
 تشخیص موجودیت اسمی (<span dir="ltr">NER</span>)‌ مسئله‌ای است که مدل می‌بایست تشخیص دهد کدام بخش‌ از متن ورودی مربوط به موجودیت‌هایی مانند اشخاص، موقعیت‌ها یا سازمان‌ها است. بیایید به این مثال نگاه کنیم:
+
+<div dir="ltr">
 
 ```python
 from transformers import pipeline
@@ -234,6 +248,7 @@ ner("My name is Sylvain and I work at Hugging Face in Brooklyn.")
  {'entity_group': 'LOC', 'score': 0.99321, 'word': 'Brooklyn', 'start': 49, 'end': 57}
 ]
 ```
+</div>
 
 در اینجا مدل به درستی تشخیص داده است که سیلوین نام یک شخص است <span dir="ltr">(PER)</span>، هاگینگ‌فِیس یک سازمان است <span dir="ltr">(ORG)</span>، و بورکلین یک موقعیت است <span dir="ltr">(LOC)</span>.
 
@@ -249,6 +264,8 @@ ner("My name is Sylvain and I work at Hugging Face in Brooklyn.")
 
 پایپ‌لاین <span dir="ltr">`question-answering`</span> با استفاده از اطلاعات موجود در یک زمینه‌ خاص‌ به پرسش‌ها پاسخ می‌دهد.
 
+<div dir="ltr">
+
 ```python
 from transformers import pipeline
 
@@ -262,12 +279,15 @@ question_answerer(
 ```python out
 {'score': 0.6385916471481323, 'start': 33, 'end': 45, 'answer': 'Hugging Face'}
 ```
+</div>
 
 توجه کنید که این پایپ‌لاین با استخراج اطلاعات از یک زمینه‌ی از پیش ارایه شده کار می‌کند و پاسخ را تولید نمی‌کند.
 
 ## خلاصه‌سازی
 
 خلاصه‌سازی مسئله‌ی کوتاه کردن یک متن به متنی کوتاه‌تر با حفظ همه‌ی (یا اغلب) جنبه‌های حائز اهمیت اشاره شده در متن است. یک مثال را باهم ببینیم:
+
+<div dir="ltr">
 
 ```python
 from transformers import pipeline
@@ -306,13 +326,15 @@ summarizer(
                   'industrial countries in Europe and Asia, continue to encourage '
                   'and advance engineering .'}]
 ```
-
+</div>
 همانند تولید متن، می‌توانید <span dir="ltr">`max_length`</span>  یا <span dir="ltr">`min_length`</span> را مشخص کنید.
 
 
 ## ترجمه
 
 برای ترجمه، با ارائه‌ی جفت زبان‌ها در نام مسئله می‌توانید از مدل‌ پیش‌فرض استفاده کنید (مانند <span dir="ltr">"translation_en_to_fr”</span>)، اما ساده‌ترین روش انتخاب مدلی که می‌خواهید از آن استفاده کنید در [هاب مدل‌ها](https://huggingface.co/models) است. اینجا سعی خواهیم کرد از فرانسوی به انگلیسی ترجمه کنیم:
+
+<div dir="ltr">
 
 ```python
 from transformers import pipeline
@@ -324,6 +346,7 @@ translator("Ce cours est produit par Hugging Face.")
 ```python out
 [{'translation_text': 'This course is produced by Hugging Face.'}]
 ```
+</div>
 
 همانند تولید متن، می‌توانید <span dir="ltr">`max_length`</span>  یا <span dir="ltr">`min_length`</span> را مشخص کنید.
 
